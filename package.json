@@ -1,0 +1,24 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "An app for node that can look up songs, movies, get tweets, and trigger a command in the random.txt folder.",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rosieknight/liri-node-app.git"
+  },
+  "author": "Laura E",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rosieknight/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/Rosieknight/liri-node-app#readme",
+  "dependencies": {
+    "request": "^2.81.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.0"
+  }
+}
