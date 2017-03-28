@@ -2,7 +2,6 @@
 var twitter = require("twitter");
 var keyring = require("./keys.js");
 var rightKeys = twitter(keyring.twitterKeys);
-//var allKeys = twitter + keyring.twitterKeys;
 
 //Variable to read and write different text files
 var fs = require("fs");
@@ -25,7 +24,7 @@ var term = "";
 for (var i = 3; i < wide.length; i++) {
 	if (i > 2 && i < wide.length) {
 
-    term = term + "+" + wide[i];
+    term = term + " + " + wide[i];
 
   } else {
 
@@ -34,14 +33,8 @@ for (var i = 3; i < wide.length; i++) {
   }
 }
 
-//Variables for each command's query.  It might be easier for them to share one
-//variable, but this make it easier for me to keep them straight.
-//Variable for looking up twitter's API
-//var twitterQuery = ;
-
 //Variable for the Omdb's api.
-var moiveQuery = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&r=json";
-
+//var moiveQuery = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&r=json";
 
 //Commands for liri
 switch(action){
@@ -63,8 +56,10 @@ switch(action){
 
 	//Calls funtion movieStuff. Adds in the search term if the varible is empty.
 	case "movie-this":
+	//Variable for the Omdb's api.
+	var moiveQuery = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&r=json";
 	if(term ===""){
-		term = "Mr." + "Nobody";
+		term = "Mr." + "+" + "Nobody";
 		moiveQuery = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&r=json";
 		movieStuff();
 	} else{
@@ -92,8 +87,8 @@ function myTweets(){
  			for (var i = 0; i < 20; i++) {
  				console.log(" ");
  				console.log(tweets[i].text);
- 				console.log("----------------------------------------------------------------------------------");
  				console.log(" ");
+ 				console.log("----------------------------------------------------------------------------------");
  			}
 		}
 	});
@@ -123,7 +118,6 @@ function spotifySong(){
 //Function for the OMDB command
 function movieStuff(){
 	request(moiveQuery, function(error, response, body) {
-
 		// If the request is successful
 	  	if (!error && response.statusCode === 200) {
 
@@ -135,14 +129,14 @@ function movieStuff(){
 	    	console.log("Language: " + JSON.parse(body).Language);
 	    	console.log("Plot: " + JSON.parse(body).Plot);
 	    	console.log("Actors: " + JSON.parse(body).Actors);
-	    	//The two below are in the requirements as Rotten Tomatoes items. However, 
+	    	console.log("Rotten Tomatoes Score: " + JSON.parse(body).Ratings[1].Value);
+	    	//The one below is in the requirements as Rotten Tomatoes page. However, 
 	    	//that information isn't provided by OMDb. I can't be certain Rotten 
 	    	//Tomatoes would contact me in a timely manner AND when I'm not at work. So,
 	    	//this is my work-around solution. If I were actually doing this for a job,
-	    	//I would use Rotten Tomatoes' form and have the code below as my backup plan
-	    	//if they took too long to respond or denyed my request.
-	    	console.log("Metascore: " + JSON.parse(body).Metascore);
-	    	console.log("Find it on IMDb: http://www.imdb.com//title/" + JSON.parse(body).imdbID + "/");
+	    	//I would use Rotten Tomatoes' form and have the code below as my backup 
+	    	//plan if they took too long to respond or denyed my request.
+	    	console.log("Find it on IMDb: http://www.imdb.com/title/" + JSON.parse(body).imdbID + "/");
 	  	}
 	});
 }
@@ -157,8 +151,19 @@ function beRandom(){
 		//Defining the array inFile as the action and terms for Liri.
 		action = inFile[0];
 		term = inFile[1];
-		
+		spotifySong();
+	/*}).end(function(){
+		console.log(action);
+		console.log(term);*/
 	});
+	/*var useful =fs.readFileSync("random.txt");
+	var fromFile = useful.toString().split(",");
+	action = fromFile[0];
+	term = fromFile[1];
+	console.log(action);
+	console.log(term);
+	return action;
+	return term;*/
 }
 
 //I keep forgeting what Liri's commands are, so I made this function to remind me.

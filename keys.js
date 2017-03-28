@@ -1,4 +1,4 @@
-console.log('this is loaded');
+//console.log('this is loaded');
 
 //These are read-only, for grading purposes.
 exports.twitterKeys = {
