@@ -98,6 +98,7 @@ function myTweets(){
 	//There's nothing special about the (%). It's just an attempt at making 
 	//the text file easier to read.
 	fs.appendFile("log.txt", " (%) Get Tweets");
+	fs.writeFile("index.html", " (%) Get Tweets");
 }
 
 //Function for the Spotify command
